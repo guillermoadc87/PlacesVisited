@@ -101,6 +101,8 @@ class LoginController: UIViewController {
         //        fbLogin.heightAnchor.constraint(equalToConstant: 70).isActive = true
     }
     
+    
+    
     // Change login button text
     func handleLoginRegisterChange() {
         let indexSeleted = loginRegisterSegmentedControl.selectedSegmentIndex

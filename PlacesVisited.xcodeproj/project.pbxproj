@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		2C2883AB7A5D519DD478037D /* Pods_PlacesVisited.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB66ECF818C3FDC30C437D82 /* Pods_PlacesVisited.framework */; };
 		620035D01EE4C4BF00D01597 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620035CF1EE4C4BF00D01597 /* Extensions.swift */; };
+		622F5B111EEA4C46000C477D /* PlacesVisited.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 622F5B0F1EEA4C46000C477D /* PlacesVisited.xcdatamodeld */; };
 		623D2B561EE83C5F00AF50B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 623D2B551EE83C5F00AF50B4 /* GoogleService-Info.plist */; };
+		623D2B581EE8B5C900AF50B4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623D2B571EE8B5C900AF50B4 /* ProfileViewController.swift */; };
 		625F77F51EE4E82100CDC2C0 /* AddPhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77F41EE4E82100CDC2C0 /* AddPhotoController.swift */; };
 		625F77F71EE5D63500CDC2C0 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77F61EE5D63500CDC2C0 /* CustomTabBarController.swift */; };
-		625F77F91EE66A9000CDC2C0 /* CustomTabBarController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77F81EE66A9000CDC2C0 /* CustomTabBarController2.swift */; };
+		625F77F91EE66A9000CDC2C0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77F81EE66A9000CDC2C0 /* MapViewController.swift */; };
 		625F77FB1EE76A8400CDC2C0 /* SharesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77FA1EE76A8400CDC2C0 /* SharesViewController.swift */; };
 		62D2E1461EE25D16000E5574 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D2E1451EE25D16000E5574 /* AppDelegate.swift */; };
 		62D2E1481EE25D16000E5574 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D2E1471EE25D16000E5574 /* LoginController.swift */; };
@@ -25,10 +27,12 @@
 /* Begin PBXFileReference section */
 		5E434EB80E883BC20671B277 /* Pods-PlacesVisited.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacesVisited.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlacesVisited/Pods-PlacesVisited.release.xcconfig"; sourceTree = "<group>"; };
 		620035CF1EE4C4BF00D01597 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		622F5B101EEA4C46000C477D /* PlacesVisited.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlacesVisited.xcdatamodel; sourceTree = "<group>"; };
 		623D2B551EE83C5F00AF50B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		623D2B571EE8B5C900AF50B4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		625F77F41EE4E82100CDC2C0 /* AddPhotoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhotoController.swift; sourceTree = "<group>"; };
 		625F77F61EE5D63500CDC2C0 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
-		625F77F81EE66A9000CDC2C0 /* CustomTabBarController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController2.swift; sourceTree = "<group>"; };
+		625F77F81EE66A9000CDC2C0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		625F77FA1EE76A8400CDC2C0 /* SharesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesViewController.swift; sourceTree = "<group>"; };
 		62D2E1421EE25D16000E5574 /* PlacesVisited.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlacesVisited.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D2E1451EE25D16000E5574 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,13 @@
 			name = Helper;
 			sourceTree = "<group>";
 		};
+		620ECF7B1EEA232800EDA2D1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		62D2E1391EE25D16000E5574 = {
 			isa = PBXGroup;
 			children = (
@@ -93,12 +104,14 @@
 			children = (
 				62D2E1451EE25D16000E5574 /* AppDelegate.swift */,
 				62D2E1591EE27041000E5574 /* Controllers */,
+				620ECF7B1EEA232800EDA2D1 /* Models */,
 				620035D11EE4D02600D01597 /* Helper */,
 				62D2E1491EE25D16000E5574 /* Main.storyboard */,
 				62D2E14C1EE25D16000E5574 /* Assets.xcassets */,
 				62D2E14E1EE25D16000E5574 /* LaunchScreen.storyboard */,
 				62D2E1511EE25D16000E5574 /* Info.plist */,
 				623D2B551EE83C5F00AF50B4 /* GoogleService-Info.plist */,
+				622F5B0F1EEA4C46000C477D /* PlacesVisited.xcdatamodeld */,
 			);
 			path = PlacesVisited;
 			sourceTree = "<group>";
@@ -110,8 +123,9 @@
 				62D2E1471EE25D16000E5574 /* LoginController.swift */,
 				62D2E15A1EE27F43000E5574 /* ViewController.swift */,
 				625F77F41EE4E82100CDC2C0 /* AddPhotoController.swift */,
-				625F77F81EE66A9000CDC2C0 /* CustomTabBarController2.swift */,
+				625F77F81EE66A9000CDC2C0 /* MapViewController.swift */,
 				625F77FA1EE76A8400CDC2C0 /* SharesViewController.swift */,
+				623D2B571EE8B5C900AF50B4 /* ProfileViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -256,7 +270,9 @@
 				625F77F71EE5D63500CDC2C0 /* CustomTabBarController.swift in Sources */,
 				62D2E1481EE25D16000E5574 /* LoginController.swift in Sources */,
 				62D2E1461EE25D16000E5574 /* AppDelegate.swift in Sources */,
-				625F77F91EE66A9000CDC2C0 /* CustomTabBarController2.swift in Sources */,
+				622F5B111EEA4C46000C477D /* PlacesVisited.xcdatamodeld in Sources */,
+				623D2B581EE8B5C900AF50B4 /* ProfileViewController.swift in Sources */,
+				625F77F91EE66A9000CDC2C0 /* MapViewController.swift in Sources */,
 				620035D01EE4C4BF00D01597 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,7 +399,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 45Y4HVRUD3;
 				INFOPLIST_FILE = PlacesVisited/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.PlacesVisited;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -398,7 +414,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 45Y4HVRUD3;
 				INFOPLIST_FILE = PlacesVisited/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.PlacesVisited;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -428,6 +444,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		622F5B0F1EEA4C46000C477D /* PlacesVisited.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				622F5B101EEA4C46000C477D /* PlacesVisited.xcdatamodel */,
+			);
+			currentVersion = 622F5B101EEA4C46000C477D /* PlacesVisited.xcdatamodel */;
+			path = PlacesVisited.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 62D2E13A1EE25D16000E5574 /* Project object */;
 }

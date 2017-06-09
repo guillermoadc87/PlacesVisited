@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import CoreData
+import Firebase
 import GooglePlaces
 import GoogleMaps
 import GooglePlacePicker
 
 class CustomTabBarController: UITabBarController {
     
+    let context = AppDelegate.viewContext
+    
+    var pickedImage: UIImage?
     let buttonWidth: CGFloat = 56
     var buttonsShown: Bool = false
+    fileprivate var _authHandle: AuthStateDidChangeListenerHandle!
     
     lazy var middleButton: UIButton = {
         let mb = UIButton(type: .custom)
@@ -64,23 +70,24 @@ class CustomTabBarController: UITabBarController {
         let nav1 = UINavigationController(rootViewController: vc1)
         
         let vc2 = SharesViewController()
-        vc2.tabBarItem = UITabBarItem(title: "Shares", image: UIImage(named: "share"), selectedImage: UIImage(named: "map"))
+        vc2.tabBarItem = UITabBarItem(title: "Shares", image: UIImage(named: "share"), selectedImage: UIImage(named: "share"))
         let nav2 = UINavigationController(rootViewController: vc2)
         
         let vc3 = UIViewController()
-        vc3.tabBarItem = UITabBarItem(title: "", image: nil, selectedImage: UIImage(named: "map"))
+        vc3.tabBarItem = UITabBarItem(title: "", image: nil, selectedImage: nil)
         let nav3 = UINavigationController(rootViewController: vc3)
         
         let vc4 = AddPhotoController()
         vc4.tabBarItem = UITabBarItem(title: "Add", image: UIImage(named: "map"), selectedImage: UIImage(named: "map"))
         let nav4 = UINavigationController(rootViewController: vc4)
         
-        let vc5 = UIViewController()
-        vc5.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "map"))
+        let vc5 = ProfileViewController()
+        vc5.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile"))
         let nav5 = UINavigationController(rootViewController: vc5)
         
         viewControllers = [nav1, nav2, nav3, nav4, nav5]
         
+        configureAuth()
         setupButton()
     }
     
@@ -91,6 +98,19 @@ class CustomTabBarController: UITabBarController {
 //        present(placePicker, animated: true, completion: nil)
 //    }
     
+    func configureAuth() {
+        _authHandle = Auth.auth().addStateDidChangeListener { (auth: Auth, user: User?) in
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            if let activeUser = user {
+                if appDelegate.user != activeUser {
+                    appDelegate.user = activeUser
+                    print(user ?? "")
+                }
+            } else {
+                appDelegate.handleLogout(sender: self)
+            }
+        }
+    }
     
     func setupButton() {
         //view.addSubview(cameraButton)
@@ -98,7 +118,6 @@ class CustomTabBarController: UITabBarController {
         view.insertSubview(cameraButton, belowSubview: tabBar)
         view.insertSubview(libraryButton, belowSubview: tabBar)
         view.addSubview(middleButton)
-        
         
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
         
@@ -120,11 +139,6 @@ class CustomTabBarController: UITabBarController {
         libraryButtonYConstrain?.isActive = true
         libraryButton.widthAnchor.constraint(equalToConstant: buttonWidth/2).isActive = true
         libraryButton.heightAnchor.constraint(equalToConstant: buttonWidth/2).isActive = true
-        
-        //blackView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor)
-        //blackView.bottomAnchor.constraint(equalTo: tabBar.topAnchor)
-        //blackView.leftAnchor.constraint(equalTo: view.leftAnchor)
-        //blackView.rightAnchor.constraint(equalTo: view.rightAnchor)
         
     }
     
@@ -161,13 +175,13 @@ class CustomTabBarController: UITabBarController {
             self.view.layoutIfNeeded()
             if !self.buttonsShown {
                 self.blackView.alpha = 1
-                self.middleButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
+//                self.middleButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
                 self.middleButton.setBackgroundImage(UIImage(named: "minus"), for: .normal)
                 self.cameraButton.layer.transform = CATransform3DMakeScale(2, 2, 2)
                 self.libraryButton.layer.transform = CATransform3DMakeScale(2, 2, 2)
             } else {
                 self.blackView.alpha = 0
-                self.middleButton.transform = CGAffineTransform(rotationAngle: -CGFloat.pi)
+//                self.middleButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
                 self.middleButton.setBackgroundImage(UIImage(named: "add"), for: .normal)
                 self.cameraButton.layer.transform = CATransform3DIdentity
                 self.libraryButton.layer.transform = CATransform3DIdentity
@@ -188,19 +202,104 @@ class CustomTabBarController: UITabBarController {
         }
         
         present(imagePicker, animated: true, completion: nil)
-//        navigationController?.pushViewController(UIViewController(), animated: true)
+//        let config = GMSPlacePickerConfig(viewport: nil)
+//        let placePicker = GMSPlacePickerViewController(config: config)
+//        present(placePicker, animated: true, completion: nil)
     }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        handleDismissButtons()
+    }
+    
+    deinit {
+        Auth.auth().removeStateDidChangeListener(_authHandle)
+    }
+    
 }
 
 extension CustomTabBarController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        self.dismiss(animated: true, completion: nil)
         if let image = info[UIImagePickerControllerOriginalImage] as! UIImage? {
-            print("The image is: ", image)
+            pickedImage = image
             let config = GMSPlacePickerConfig(viewport: nil)
             let placePicker = GMSPlacePickerViewController(config: config)
+            placePicker.delegate = self
             present(placePicker, animated: true, completion: nil)
         }
         
-        self.dismiss(animated: true, completion: nil)
+        
+    }
+}
+
+extension CustomTabBarController: GMSPlacePickerViewControllerDelegate {
+    
+    func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
+        print(place.name)
+        var country: Country?
+        var city: City?
+        var placeVisited: Place?
+        
+        for component in place.addressComponents! {
+            if component.type == "country" {
+                let request: NSFetchRequest = Country.fetchRequest()
+                country = verifyDuplicityForRequest(request as! NSFetchRequest<NSFetchRequestResult>, withParameter: component.name) as? Country
+                if country == nil {
+                    print(component.name)
+                    country = Country(context: context)
+                    country?.name = component.name
+                }
+            } else if component.type == "locality" {
+                let request: NSFetchRequest = City.fetchRequest()
+                city = verifyDuplicityForRequest(request as! NSFetchRequest<NSFetchRequestResult>, withParameter: component.name) as? City
+                if city == nil {
+                    print(component.name)
+                    city = City(context: context)
+                    city?.name = component.name
+                }
+            }
+            
+        }
+        if let cityCountry = city?.country {
+           print(cityCountry)
+        } else {
+            city?.country = country
+        }
+        let request: NSFetchRequest = Place.fetchRequest()
+        placeVisited = verifyDuplicityForRequest(request as! NSFetchRequest<NSFetchRequestResult>, withParameter: place.name) as? Place
+        if placeVisited == nil {
+            print(place.name)
+            placeVisited?.name = place.name
+            placeVisited?.latitude = place.coordinate.latitude
+            placeVisited?.longitude = place.coordinate.longitude
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            print("There was a problem while saving to the database")
+        }
+        
+        viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func verifyDuplicityForRequest(_ request: NSFetchRequest<NSFetchRequestResult>, withParameter parameter: String) -> NSManagedObject? {
+        request.predicate = NSPredicate(format: "name = %@", parameter)
+        do {
+            let matches = try context.fetch(request)
+            if matches.count > 0 {
+                assert(matches.count > 1, "database inconsistency")
+                return matches[0] as? NSManagedObject
+            } else {
+                return nil
+                
+            }
+        } catch let error {
+            return nil
+        }
+    }
+    
+    func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
+        viewController.dismiss(animated: true, completion: nil)
     }
 }
