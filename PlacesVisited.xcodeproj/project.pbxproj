@@ -10,30 +10,38 @@
 		2C2883AB7A5D519DD478037D /* Pods_PlacesVisited.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB66ECF818C3FDC30C437D82 /* Pods_PlacesVisited.framework */; };
 		620035D01EE4C4BF00D01597 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620035CF1EE4C4BF00D01597 /* Extensions.swift */; };
 		622F5B111EEA4C46000C477D /* PlacesVisited.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 622F5B0F1EEA4C46000C477D /* PlacesVisited.xcdatamodeld */; };
+		622F5B131EEB2C5A000C477D /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622F5B121EEB2C5A000C477D /* PhotoCollectionViewController.swift */; };
 		623D2B561EE83C5F00AF50B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 623D2B551EE83C5F00AF50B4 /* GoogleService-Info.plist */; };
 		623D2B581EE8B5C900AF50B4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623D2B571EE8B5C900AF50B4 /* ProfileViewController.swift */; };
 		625F77F51EE4E82100CDC2C0 /* AddPhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77F41EE4E82100CDC2C0 /* AddPhotoController.swift */; };
 		625F77F71EE5D63500CDC2C0 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77F61EE5D63500CDC2C0 /* CustomTabBarController.swift */; };
-		625F77F91EE66A9000CDC2C0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77F81EE66A9000CDC2C0 /* MapViewController.swift */; };
+		625F77F91EE66A9000CDC2C0 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77F81EE66A9000CDC2C0 /* PostViewController.swift */; };
 		625F77FB1EE76A8400CDC2C0 /* SharesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77FA1EE76A8400CDC2C0 /* SharesViewController.swift */; };
+		62A26BFF1EED9521008E9CE4 /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A26BFE1EED9521008E9CE4 /* PlaceCell.swift */; };
+		62A26C011EEDB731008E9CE4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A26C001EEDB731008E9CE4 /* Post.swift */; };
+		62A26C031EEDBBF4008E9CE4 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A26C021EEDBBF4008E9CE4 /* GCDBlackBox.swift */; };
 		62D2E1461EE25D16000E5574 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D2E1451EE25D16000E5574 /* AppDelegate.swift */; };
 		62D2E1481EE25D16000E5574 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D2E1471EE25D16000E5574 /* LoginController.swift */; };
 		62D2E14B1EE25D16000E5574 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D2E1491EE25D16000E5574 /* Main.storyboard */; };
 		62D2E14D1EE25D16000E5574 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D2E14C1EE25D16000E5574 /* Assets.xcassets */; };
 		62D2E1501EE25D16000E5574 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D2E14E1EE25D16000E5574 /* LaunchScreen.storyboard */; };
-		62D2E15B1EE27F43000E5574 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D2E15A1EE27F43000E5574 /* ViewController.swift */; };
+		62D2E15B1EE27F43000E5574 /* PlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D2E15A1EE27F43000E5574 /* PlacesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5E434EB80E883BC20671B277 /* Pods-PlacesVisited.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacesVisited.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlacesVisited/Pods-PlacesVisited.release.xcconfig"; sourceTree = "<group>"; };
 		620035CF1EE4C4BF00D01597 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		622F5B101EEA4C46000C477D /* PlacesVisited.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlacesVisited.xcdatamodel; sourceTree = "<group>"; };
+		622F5B121EEB2C5A000C477D /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		623D2B551EE83C5F00AF50B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		623D2B571EE8B5C900AF50B4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		625F77F41EE4E82100CDC2C0 /* AddPhotoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhotoController.swift; sourceTree = "<group>"; };
 		625F77F61EE5D63500CDC2C0 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
-		625F77F81EE66A9000CDC2C0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		625F77F81EE66A9000CDC2C0 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		625F77FA1EE76A8400CDC2C0 /* SharesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesViewController.swift; sourceTree = "<group>"; };
+		62A26BFE1EED9521008E9CE4 /* PlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
+		62A26C001EEDB731008E9CE4 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		62A26C021EEDBBF4008E9CE4 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		62D2E1421EE25D16000E5574 /* PlacesVisited.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlacesVisited.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D2E1451EE25D16000E5574 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62D2E1471EE25D16000E5574 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -41,7 +49,7 @@
 		62D2E14C1EE25D16000E5574 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62D2E14F1EE25D16000E5574 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		62D2E1511EE25D16000E5574 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		62D2E15A1EE27F43000E5574 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		62D2E15A1EE27F43000E5574 /* PlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesViewController.swift; sourceTree = "<group>"; };
 		85383EF0CFDD9A49E152013B /* Pods-PlacesVisited.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacesVisited.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlacesVisited/Pods-PlacesVisited.debug.xcconfig"; sourceTree = "<group>"; };
 		EB66ECF818C3FDC30C437D82 /* Pods_PlacesVisited.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlacesVisited.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -69,6 +77,7 @@
 		620035D11EE4D02600D01597 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				62A26C021EEDBBF4008E9CE4 /* GCDBlackBox.swift */,
 				620035CF1EE4C4BF00D01597 /* Extensions.swift */,
 			);
 			name = Helper;
@@ -77,8 +86,17 @@
 		620ECF7B1EEA232800EDA2D1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				62A26C001EEDB731008E9CE4 /* Post.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		62A26BFD1EED9500008E9CE4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				62A26BFE1EED9521008E9CE4 /* PlaceCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		62D2E1391EE25D16000E5574 = {
@@ -103,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				62D2E1451EE25D16000E5574 /* AppDelegate.swift */,
+				62A26BFD1EED9500008E9CE4 /* Views */,
 				62D2E1591EE27041000E5574 /* Controllers */,
 				620ECF7B1EEA232800EDA2D1 /* Models */,
 				620035D11EE4D02600D01597 /* Helper */,
@@ -121,11 +140,12 @@
 			children = (
 				625F77F61EE5D63500CDC2C0 /* CustomTabBarController.swift */,
 				62D2E1471EE25D16000E5574 /* LoginController.swift */,
-				62D2E15A1EE27F43000E5574 /* ViewController.swift */,
-				625F77F41EE4E82100CDC2C0 /* AddPhotoController.swift */,
-				625F77F81EE66A9000CDC2C0 /* MapViewController.swift */,
+				62D2E15A1EE27F43000E5574 /* PlacesViewController.swift */,
+				622F5B121EEB2C5A000C477D /* PhotoCollectionViewController.swift */,
+				625F77F81EE66A9000CDC2C0 /* PostViewController.swift */,
 				625F77FA1EE76A8400CDC2C0 /* SharesViewController.swift */,
 				623D2B571EE8B5C900AF50B4 /* ProfileViewController.swift */,
+				625F77F41EE4E82100CDC2C0 /* AddPhotoController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -265,15 +285,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				625F77F51EE4E82100CDC2C0 /* AddPhotoController.swift in Sources */,
-				62D2E15B1EE27F43000E5574 /* ViewController.swift in Sources */,
+				62D2E15B1EE27F43000E5574 /* PlacesViewController.swift in Sources */,
 				625F77FB1EE76A8400CDC2C0 /* SharesViewController.swift in Sources */,
 				625F77F71EE5D63500CDC2C0 /* CustomTabBarController.swift in Sources */,
+				62A26C011EEDB731008E9CE4 /* Post.swift in Sources */,
 				62D2E1481EE25D16000E5574 /* LoginController.swift in Sources */,
+				62A26C031EEDBBF4008E9CE4 /* GCDBlackBox.swift in Sources */,
 				62D2E1461EE25D16000E5574 /* AppDelegate.swift in Sources */,
 				622F5B111EEA4C46000C477D /* PlacesVisited.xcdatamodeld in Sources */,
 				623D2B581EE8B5C900AF50B4 /* ProfileViewController.swift in Sources */,
-				625F77F91EE66A9000CDC2C0 /* MapViewController.swift in Sources */,
+				622F5B131EEB2C5A000C477D /* PhotoCollectionViewController.swift in Sources */,
+				625F77F91EE66A9000CDC2C0 /* PostViewController.swift in Sources */,
 				620035D01EE4C4BF00D01597 /* Extensions.swift in Sources */,
+				62A26BFF1EED9521008E9CE4 /* PlaceCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

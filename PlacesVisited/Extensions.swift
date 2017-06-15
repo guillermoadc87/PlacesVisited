@@ -68,3 +68,20 @@ extension UIViewController {
         }
     }
 }
+
+extension UIImageView {
+    
+    func downloadImageWithURL(urlString: String, completionHandler: @escaping (_ data: Data?, _ error: NSError?) -> Void) {
+        guard let url = URL(string: urlString) else { return }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard error == nil else {
+                completionHandler(nil, error as NSError?)
+                return
+            }
+            
+            completionHandler(data, nil)
+            }.resume()
+        
+    }
+    
+}

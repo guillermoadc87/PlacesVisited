@@ -62,14 +62,16 @@ class CustomTabBarController: UITabBarController {
         return view
     }()
     
+    let vc1 = PlacesViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let vc1 = ViewController()
+        
         vc1.tabBarItem = UITabBarItem(title: "Places", image: UIImage(named: "map"), selectedImage: UIImage(named: "map"))
         let nav1 = UINavigationController(rootViewController: vc1)
         
-        let vc2 = SharesViewController()
+        let vc2 = SharesViewController(collectionViewLayout: UICollectionViewFlowLayout())
         vc2.tabBarItem = UITabBarItem(title: "Shares", image: UIImage(named: "share"), selectedImage: UIImage(named: "share"))
         let nav2 = UINavigationController(rootViewController: vc2)
         
@@ -143,9 +145,7 @@ class CustomTabBarController: UITabBarController {
     }
     
     func handleDismissButtons() {
-        print("Aqui estoy: ", buttonsShown)
         if buttonsShown {
-            print("Hide Buttons")
             handleMiddleButtonClicked()
         }
     }
@@ -188,6 +188,8 @@ class CustomTabBarController: UITabBarController {
             }
             }
             , completion: nil)
+        
+        
         
         buttonsShown = !buttonsShown
     }
@@ -244,6 +246,7 @@ extension CustomTabBarController: GMSPlacePickerViewControllerDelegate {
             if component.type == "country" {
                 let request: NSFetchRequest = Country.fetchRequest()
                 country = verifyDuplicityForRequest(request as! NSFetchRequest<NSFetchRequestResult>, withParameter: component.name) as? Country
+                print(country)
                 if country == nil {
                     print(component.name)
                     country = Country(context: context)
@@ -252,6 +255,7 @@ extension CustomTabBarController: GMSPlacePickerViewControllerDelegate {
             } else if component.type == "locality" {
                 let request: NSFetchRequest = City.fetchRequest()
                 city = verifyDuplicityForRequest(request as! NSFetchRequest<NSFetchRequestResult>, withParameter: component.name) as? City
+                print(city)
                 if city == nil {
                     print(component.name)
                     city = City(context: context)
@@ -267,11 +271,15 @@ extension CustomTabBarController: GMSPlacePickerViewControllerDelegate {
         }
         let request: NSFetchRequest = Place.fetchRequest()
         placeVisited = verifyDuplicityForRequest(request as! NSFetchRequest<NSFetchRequestResult>, withParameter: place.name) as? Place
+        print(placeVisited)
         if placeVisited == nil {
             print(place.name)
+            placeVisited = Place(context: context)
             placeVisited?.name = place.name
             placeVisited?.latitude = place.coordinate.latitude
             placeVisited?.longitude = place.coordinate.longitude
+            placeVisited?.city = city
+            placeVisited?.photoData = UIImagePNGRepresentation(pickedImage!) as NSData?
         }
         
         do {
@@ -279,8 +287,10 @@ extension CustomTabBarController: GMSPlacePickerViewControllerDelegate {
         } catch {
             print("There was a problem while saving to the database")
         }
-        
+        print(placeVisited)
         viewController.dismiss(animated: true, completion: nil)
+        vc1.performFetchFor(vc1.fetchedResultsController)
+        vc1.tableView.reloadData()
     }
     
     func verifyDuplicityForRequest(_ request: NSFetchRequest<NSFetchRequestResult>, withParameter parameter: String) -> NSManagedObject? {
@@ -288,7 +298,7 @@ extension CustomTabBarController: GMSPlacePickerViewControllerDelegate {
         do {
             let matches = try context.fetch(request)
             if matches.count > 0 {
-                assert(matches.count > 1, "database inconsistency")
+//                assert(matches.count > 1, "database inconsistency")
                 return matches[0] as? NSManagedObject
             } else {
                 return nil

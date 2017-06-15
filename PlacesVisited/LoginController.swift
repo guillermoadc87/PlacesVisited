@@ -74,24 +74,20 @@ class LoginController: UIViewController {
         view.addSubview(fbLogin)
         
         loginRegisterSegmentedControl.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -10).isActive = true
-        loginRegisterSegmentedControl.leftAnchor.constraint(equalTo: emailTextField.leftAnchor).isActive = true
-        loginRegisterSegmentedControl.widthAnchor.constraint(equalTo: emailTextField.widthAnchor).isActive = true
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[v0]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": loginRegisterSegmentedControl]))
         loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 30).isActive = true
 
-        
         emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         emailTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100).isActive = true
-        emailTextField.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20).isActive = true
+        emailTextField.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
-        passwordTextField.leftAnchor.constraint(equalTo: emailTextField.leftAnchor).isActive = true
         passwordTextField.widthAnchor.constraint(equalTo: emailTextField.widthAnchor).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         loginRegisterButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10).isActive = true
-        loginRegisterButton.leftAnchor.constraint(equalTo: passwordTextField.leftAnchor).isActive = true
-        loginRegisterButton.widthAnchor.constraint(equalTo: passwordTextField.widthAnchor).isActive = true
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[v0]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": loginRegisterButton]))
         loginRegisterButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         fbLogin.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
