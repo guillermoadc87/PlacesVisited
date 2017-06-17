@@ -11,12 +11,14 @@ import CoreData
 import Firebase
 import FBSDKLoginKit
 
+let cellId = "cellId"
+
 class PlacesViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let context = AppDelegate.viewContext
     var fetchedResultsController: NSFetchedResultsController<Country> = NSFetchedResultsController()
-    let cellId = "cellId"
+    var favoriteController: FavoritePhotoController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,6 @@ class PlacesViewController: UITableViewController, NSFetchedResultsControllerDel
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.title = "Places"
         
     }
@@ -109,6 +110,7 @@ class PlacesViewController: UITableViewController, NSFetchedResultsControllerDel
         let layout = UICollectionViewFlowLayout()
         let photoVC = PhotoCollectionViewController(collectionViewLayout: layout)
         photoVC.cityName = cell?.textLabel?.text
+        photoVC.favoriteController = favoriteController
         navigationController?.pushViewController(photoVC, animated: true)
     }
     

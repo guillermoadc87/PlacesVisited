@@ -12,6 +12,6 @@ class Post: NSObject {
     var name: String?
     var email: String?
     var photoURL: String?
-    var date: String?
+    var date: Date?
     var text: String?
 }

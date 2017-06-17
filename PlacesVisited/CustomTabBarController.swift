@@ -68,9 +68,6 @@ class CustomTabBarController: UITabBarController {
         super.viewDidLoad()
         
         
-        vc1.tabBarItem = UITabBarItem(title: "Places", image: UIImage(named: "map"), selectedImage: UIImage(named: "map"))
-        let nav1 = UINavigationController(rootViewController: vc1)
-        
         let vc2 = SharesViewController(collectionViewLayout: UICollectionViewFlowLayout())
         vc2.tabBarItem = UITabBarItem(title: "Shares", image: UIImage(named: "share"), selectedImage: UIImage(named: "share"))
         let nav2 = UINavigationController(rootViewController: vc2)
@@ -86,6 +83,10 @@ class CustomTabBarController: UITabBarController {
         let vc5 = ProfileViewController()
         vc5.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile"))
         let nav5 = UINavigationController(rootViewController: vc5)
+        
+        vc1.tabBarItem = UITabBarItem(title: "Places", image: UIImage(named: "map"), selectedImage: UIImage(named: "map"))
+        vc1.favoriteController = vc4
+        let nav1 = UINavigationController(rootViewController: vc1)
         
         viewControllers = [nav1, nav2, nav3, nav4, nav5]
         

@@ -18,6 +18,7 @@ class PhotoCollectionViewController: UICollectionViewController, UICollectionVie
     var selectionOn: Bool = false
     var cellsToDelete: [PlaceCell] = []
     var fetchedResultsController: NSFetchedResultsController<Place> = NSFetchedResultsController()
+    var favoriteController: FavoritePhotoController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -193,8 +194,11 @@ class PhotoCollectionViewController: UICollectionViewController, UICollectionVie
                 // do stuff with your cell, for example print the indexPath
                 cell.favoriteView.isHidden = !cell.favoriteView.isHidden
                 cell.place?.isFavorite = cell.favoriteView.isHidden
+                
                 do {
                     try context.save()
+                    favoriteController?.performFetchFor((favoriteController?.fetchedResultsController)!)
+                    favoriteController?.collectionView?.reloadData()
                 } catch {
                     print("There was a problem while saving to the database")
                 }

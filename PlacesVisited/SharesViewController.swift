@@ -46,11 +46,14 @@ class SharesViewController: UICollectionViewController, UICollectionViewDelegate
         database.child("posts").observe(.childAdded, with: { snapshot in
             if let dictionaty = snapshot.value as? [String: AnyObject] {
                 for (placeName, post) in dictionaty {
-                    var dic = (post as? [String: String])
-                    dic?["name"] = placeName
+                    var dic = (post as! [String: AnyObject])
+                    dic["name"] = placeName as AnyObject?
+                    let timeInterval = Double(dic["date"] as! String)
+                    dic["date"] = Date.init(timeIntervalSince1970: timeInterval!) as AnyObject?
                     let post = Post()
-                    post.setValuesForKeys(dic!)
+                    post.setValuesForKeys(dic)
                     self.postArray?.append(post)
+                    self.postArray = self.postArray?.sorted(by: {$0.date! > $1.date!})
                 }
                 performUIUpdatesOnMain {
                     self.collectionView?.reloadData()
