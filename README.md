@@ -12,7 +12,7 @@ With CocoPods installed, you can proceed to installing the pods that the project
 
 ```$ pod install```
 
-To install all the libreries, you need to navigate to the directy of you project (were the Podfile is) and run the command:
+With all that out of the way, you can run the project in the simulator or on your iOS device.
 
 
 
