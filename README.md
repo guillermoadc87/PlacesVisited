@@ -4,7 +4,7 @@ PlacesVisited is an app that lets you for collecting all the special places you'
 Documentation
 -------------
 
-In order for the project run in Xcode, you need to install the pods included in the pod file provided. For that you need to first install CocoaPods:
+In order for the project run in Xcode, you need to install the pods included in the Podfile provided. For that you need to first install CocoaPods:
 
 ```$ sudo gem install cocoapods```
 
