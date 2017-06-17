@@ -27,6 +27,7 @@
 		62D2E14D1EE25D16000E5574 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D2E14C1EE25D16000E5574 /* Assets.xcassets */; };
 		62D2E1501EE25D16000E5574 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D2E14E1EE25D16000E5574 /* LaunchScreen.storyboard */; };
 		62D2E15B1EE27F43000E5574 /* PlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D2E15A1EE27F43000E5574 /* PlacesViewController.swift */; };
+		62F8BD921EF5EDB200FFD86E /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F8BD911EF5EDB200FFD86E /* PostCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		62D2E14F1EE25D16000E5574 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		62D2E1511EE25D16000E5574 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62D2E15A1EE27F43000E5574 /* PlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesViewController.swift; sourceTree = "<group>"; };
+		62F8BD911EF5EDB200FFD86E /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		85383EF0CFDD9A49E152013B /* Pods-PlacesVisited.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacesVisited.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlacesVisited/Pods-PlacesVisited.debug.xcconfig"; sourceTree = "<group>"; };
 		EB66ECF818C3FDC30C437D82 /* Pods_PlacesVisited.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlacesVisited.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				62A26BFE1EED9521008E9CE4 /* PlaceCell.swift */,
+				62F8BD911EF5EDB200FFD86E /* PostCell.swift */,
 				626AAD0C1EF4CCCA00072EB5 /* CheckMark.swift */,
 			);
 			name = Views;
@@ -302,6 +305,7 @@
 				625F77F91EE66A9000CDC2C0 /* PostViewController.swift in Sources */,
 				620035D01EE4C4BF00D01597 /* Extensions.swift in Sources */,
 				62A26BFF1EED9521008E9CE4 /* PlaceCell.swift in Sources */,
+				62F8BD921EF5EDB200FFD86E /* PostCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

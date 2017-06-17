@@ -67,7 +67,6 @@ class CustomTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         let vc2 = SharesViewController(collectionViewLayout: UICollectionViewFlowLayout())
         vc2.tabBarItem = UITabBarItem(title: "Shares", image: UIImage(named: "share"), selectedImage: UIImage(named: "share"))
         let nav2 = UINavigationController(rootViewController: vc2)

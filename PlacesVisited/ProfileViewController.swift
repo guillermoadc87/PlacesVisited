@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
 class ProfileViewController: UIViewController {
     
@@ -47,23 +48,11 @@ class ProfileViewController: UIViewController {
         return label
     }()
     
-    var activityIndicator: UIActivityIndicatorView = {
-        let ai = UIActivityIndicatorView()
-        ai.hidesWhenStopped = true
-        ai.activityIndicatorViewStyle = .gray
-        ai.translatesAutoresizingMaskIntoConstraints = false
-        return ai
+    let activitiIndicatorView: NVActivityIndicatorView =  {
+        let aiv = NVActivityIndicatorView(frame: CGRect(x: 50, y: 50, width: 30, height: 30), type: NVActivityIndicatorType.ballPulse, color: UIColor(red: 59/255, green: 131/255, blue: 247/255, alpha: 1))
+        aiv.translatesAutoresizingMaskIntoConstraints = false
+        return aiv
     }()
-    
-    func showActivityIndicator(){
-        activityIndicator.startAnimating()
-        UIApplication.shared.beginIgnoringInteractionEvents()
-    }
-    
-    func hideActivityIndicator(){
-        activityIndicator.stopAnimating()
-        UIApplication.shared.endIgnoringInteractionEvents()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +75,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(profileImageView)
         view.addSubview(usernameLabel)
         view.addSubview(logoutButton)
-        view.addSubview(activityIndicator)
+        view.addSubview(activitiIndicatorView)
         
         profileImageView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 50).isActive = true
         profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -101,13 +90,17 @@ class ProfileViewController: UIViewController {
         usernameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 5).isActive = true
         usernameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        activityIndicator.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor).isActive = true
-        activityIndicator.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor).isActive = true
+        
+        activitiIndicatorView.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor).isActive = true
+        activitiIndicatorView.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor).isActive = true
+        activitiIndicatorView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        activitiIndicatorView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
     }
     
     func fetchProfilePicture(_ user: User) {
-//        showActivityIndicator()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        self.activitiIndicatorView.startAnimating()
         database.child("profile_picture/\(user.uid)/profilePictureURL").observe(.value, with: { snapshot in
             let profilePictureURL = snapshot.value as! String
             self.profileImageView.downloadImageWithURL(urlString: profilePictureURL, completionHandler: { profilePictureData, error in
@@ -115,11 +108,16 @@ class ProfileViewController: UIViewController {
                     print(error ?? "")
                     return
                 }
-                performUIUpdatesOnMain {
-                    self.profileImageView.image = UIImage(data: profilePictureData!)
-//                    self.hideActivityIndicator()
+                if let photo = UIImage(data: profilePictureData!) {
+                    performUIUpdatesOnMain {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        self.activitiIndicatorView.stopAnimating()
+                        self.profileImageView.image = photo
+                    }
+                } else {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    self.activitiIndicatorView.stopAnimating()
                 }
-                
             })
         })
         
@@ -145,32 +143,34 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
     
     func saveImage(_ photo: UIImage) {
-        showActivityIndicator()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        activitiIndicatorView.startAnimating()
         let photoData = UIImagePNGRepresentation(photo)! as Data
         let metadata = StorageMetadata()
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.storage.child("profile_picture/\(self.loggedUser?.uid)").putData(photoData, metadata: metadata, completion: { metadata, error in
-                if error != nil {
-                    print(error ?? "")
-                    self.hideActivityIndicator()
-                    return
-                }
+        self.storage.child("profile_picture/\(self.loggedUser?.uid)").putData(photoData, metadata: metadata, completion: { metadata, error in
+            if error != nil {
+                print(error ?? "")
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//                self.hideActivityIndicator()
+                return
+            }
                 
-                if let profilePictureURL = metadata?.downloadURL()?.absoluteString {
-                    let values = ["profilePictureURL": profilePictureURL]
-                    self.database.child("profile_picture/\((self.loggedUser?.uid)!)").updateChildValues(values, withCompletionBlock: { error, database in
-                        if error != nil {
-                            print(error ?? "")
-                            self.hideActivityIndicator()
-                            return
-                        }
-                        self.profileImageView.image = photo
-                        self.hideActivityIndicator()
-                        self.dismiss(animated: true, completion: nil)
-                    })
-                }
-            })
-        }
+            if let profilePictureURL = metadata?.downloadURL()?.absoluteString {
+                let values = ["profilePictureURL": profilePictureURL]
+                self.database.child("profile_picture/\((self.loggedUser?.uid)!)").updateChildValues(values, withCompletionBlock: { error, database in
+                    if error != nil {
+                        print(error ?? "")
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        self.activitiIndicatorView.stopAnimating()
+                        return
+                    }
+                    self.profileImageView.image = photo
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    self.activitiIndicatorView.stopAnimating()
+                    self.dismiss(animated: true, completion: nil)
+                })
+            }
+        })
         
     }
 }

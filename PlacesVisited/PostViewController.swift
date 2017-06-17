@@ -11,6 +11,7 @@ import Firebase
 
 class PostViewController: UIViewController {
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let user = Auth.auth().currentUser
     let database = Database.database().reference()
     let storage = Storage.storage().reference()
@@ -48,9 +49,11 @@ class PostViewController: UIViewController {
         
         let imagePath = "posted_photos/" + (user?.uid)! + "/\((place?.name)!).jpg"
         let metadata = StorageMetadata()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         storage.child(imagePath).putData(place?.photoData as! Data, metadata: metadata, completion: { metadata, error in
             if error != nil {
                 print(error ?? "")
+                self.displayAlert(title: "Connection Problem", message: "Please look for the nearest WIFI")
                 self.disableInterection(false)
                 return
             }
@@ -60,9 +63,11 @@ class PostViewController: UIViewController {
                 self.database.child("posts").child((self.user?.uid)!).child((self.place?.name)!).updateChildValues(values, withCompletionBlock: { error, database in
                     if error != nil {
                         print(error ?? "")
+                        self.displayAlert(title: "There was an Error", message: error?.localizedDescription)
                         self.disableInterection(false)
                         return
                     }
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.dismiss(animated: true, completion: nil)
                 })
             }
