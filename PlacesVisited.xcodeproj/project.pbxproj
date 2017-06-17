@@ -11,12 +11,13 @@
 		620035D01EE4C4BF00D01597 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620035CF1EE4C4BF00D01597 /* Extensions.swift */; };
 		622F5B111EEA4C46000C477D /* PlacesVisited.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 622F5B0F1EEA4C46000C477D /* PlacesVisited.xcdatamodeld */; };
 		622F5B131EEB2C5A000C477D /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622F5B121EEB2C5A000C477D /* PhotoCollectionViewController.swift */; };
-		623D2B561EE83C5F00AF50B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 623D2B551EE83C5F00AF50B4 /* GoogleService-Info.plist */; };
 		623D2B581EE8B5C900AF50B4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623D2B571EE8B5C900AF50B4 /* ProfileViewController.swift */; };
-		625F77F51EE4E82100CDC2C0 /* AddPhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77F41EE4E82100CDC2C0 /* AddPhotoController.swift */; };
+		625F77F51EE4E82100CDC2C0 /* FavoritePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77F41EE4E82100CDC2C0 /* FavoritePhotoController.swift */; };
 		625F77F71EE5D63500CDC2C0 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77F61EE5D63500CDC2C0 /* CustomTabBarController.swift */; };
 		625F77F91EE66A9000CDC2C0 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77F81EE66A9000CDC2C0 /* PostViewController.swift */; };
 		625F77FB1EE76A8400CDC2C0 /* SharesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625F77FA1EE76A8400CDC2C0 /* SharesViewController.swift */; };
+		626AAD0D1EF4CCCA00072EB5 /* CheckMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626AAD0C1EF4CCCA00072EB5 /* CheckMark.swift */; };
+		629D71A91EF4FC1A00A7B26B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 629D71A81EF4FC1A00A7B26B /* GoogleService-Info.plist */; };
 		62A26BFF1EED9521008E9CE4 /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A26BFE1EED9521008E9CE4 /* PlaceCell.swift */; };
 		62A26C011EEDB731008E9CE4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A26C001EEDB731008E9CE4 /* Post.swift */; };
 		62A26C031EEDBBF4008E9CE4 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A26C021EEDBBF4008E9CE4 /* GCDBlackBox.swift */; };
@@ -33,12 +34,13 @@
 		620035CF1EE4C4BF00D01597 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		622F5B101EEA4C46000C477D /* PlacesVisited.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlacesVisited.xcdatamodel; sourceTree = "<group>"; };
 		622F5B121EEB2C5A000C477D /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
-		623D2B551EE83C5F00AF50B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		623D2B571EE8B5C900AF50B4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		625F77F41EE4E82100CDC2C0 /* AddPhotoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhotoController.swift; sourceTree = "<group>"; };
+		625F77F41EE4E82100CDC2C0 /* FavoritePhotoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritePhotoController.swift; sourceTree = "<group>"; };
 		625F77F61EE5D63500CDC2C0 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		625F77F81EE66A9000CDC2C0 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		625F77FA1EE76A8400CDC2C0 /* SharesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesViewController.swift; sourceTree = "<group>"; };
+		626AAD0C1EF4CCCA00072EB5 /* CheckMark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckMark.swift; sourceTree = "<group>"; };
+		629D71A81EF4FC1A00A7B26B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		62A26BFE1EED9521008E9CE4 /* PlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
 		62A26C001EEDB731008E9CE4 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		62A26C021EEDBBF4008E9CE4 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				62A26BFE1EED9521008E9CE4 /* PlaceCell.swift */,
+				626AAD0C1EF4CCCA00072EB5 /* CheckMark.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -129,7 +132,7 @@
 				62D2E14C1EE25D16000E5574 /* Assets.xcassets */,
 				62D2E14E1EE25D16000E5574 /* LaunchScreen.storyboard */,
 				62D2E1511EE25D16000E5574 /* Info.plist */,
-				623D2B551EE83C5F00AF50B4 /* GoogleService-Info.plist */,
+				629D71A81EF4FC1A00A7B26B /* GoogleService-Info.plist */,
 				622F5B0F1EEA4C46000C477D /* PlacesVisited.xcdatamodeld */,
 			);
 			path = PlacesVisited;
@@ -144,8 +147,8 @@
 				622F5B121EEB2C5A000C477D /* PhotoCollectionViewController.swift */,
 				625F77F81EE66A9000CDC2C0 /* PostViewController.swift */,
 				625F77FA1EE76A8400CDC2C0 /* SharesViewController.swift */,
+				625F77F41EE4E82100CDC2C0 /* FavoritePhotoController.swift */,
 				623D2B571EE8B5C900AF50B4 /* ProfileViewController.swift */,
-				625F77F41EE4E82100CDC2C0 /* AddPhotoController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -222,10 +225,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				629D71A91EF4FC1A00A7B26B /* GoogleService-Info.plist in Resources */,
 				62D2E1501EE25D16000E5574 /* LaunchScreen.storyboard in Resources */,
 				62D2E14D1EE25D16000E5574 /* Assets.xcassets in Resources */,
 				62D2E14B1EE25D16000E5574 /* Main.storyboard in Resources */,
-				623D2B561EE83C5F00AF50B4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				625F77F51EE4E82100CDC2C0 /* AddPhotoController.swift in Sources */,
+				625F77F51EE4E82100CDC2C0 /* FavoritePhotoController.swift in Sources */,
 				62D2E15B1EE27F43000E5574 /* PlacesViewController.swift in Sources */,
 				625F77FB1EE76A8400CDC2C0 /* SharesViewController.swift in Sources */,
 				625F77F71EE5D63500CDC2C0 /* CustomTabBarController.swift in Sources */,
@@ -293,6 +296,7 @@
 				62A26C031EEDBBF4008E9CE4 /* GCDBlackBox.swift in Sources */,
 				62D2E1461EE25D16000E5574 /* AppDelegate.swift in Sources */,
 				622F5B111EEA4C46000C477D /* PlacesVisited.xcdatamodeld in Sources */,
+				626AAD0D1EF4CCCA00072EB5 /* CheckMark.swift in Sources */,
 				623D2B581EE8B5C900AF50B4 /* ProfileViewController.swift in Sources */,
 				622F5B131EEB2C5A000C477D /* PhotoCollectionViewController.swift in Sources */,
 				625F77F91EE66A9000CDC2C0 /* PostViewController.swift in Sources */,

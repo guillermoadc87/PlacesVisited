@@ -79,8 +79,8 @@ class CustomTabBarController: UITabBarController {
         vc3.tabBarItem = UITabBarItem(title: "", image: nil, selectedImage: nil)
         let nav3 = UINavigationController(rootViewController: vc3)
         
-        let vc4 = AddPhotoController()
-        vc4.tabBarItem = UITabBarItem(title: "Add", image: UIImage(named: "map"), selectedImage: UIImage(named: "map"))
+        let vc4 = FavoritePhotoController(collectionViewLayout: UICollectionViewFlowLayout())
+        vc4.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "heart"), selectedImage: UIImage(named: "heart"))
         let nav4 = UINavigationController(rootViewController: vc4)
         
         let vc5 = ProfileViewController()

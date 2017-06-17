@@ -11,6 +11,7 @@ import UIKit
 class BaseCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
         setupLayout()
     }
     
@@ -30,6 +31,7 @@ class PlaceCell: BaseCell {
             label.text = place?.name
             let image = UIImage(data: place?.photoData as! Data)
             imageView.image = image
+            favoriteView.isHidden = (place?.isFavorite)!
             
             if let title = label.text {
                 let size = CGSize(width: frame.width, height: frame.height)
@@ -56,6 +58,24 @@ class PlaceCell: BaseCell {
         return iv
     }()
     
+    var favoriteView: UIImageView = {
+        var iv = UIImageView()
+        iv.image = UIImage(named: "heart")
+        iv.isHidden = true
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        return iv
+    }()
+    
+    let checkMark: CheckMark = {
+        let checkMark = CheckMark()
+        checkMark.isHidden = true
+        checkMark.backgroundColor = UIColor.clear
+        checkMark.translatesAutoresizingMaskIntoConstraints = false
+        return checkMark
+    }()
+    
     var label: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -66,9 +86,18 @@ class PlaceCell: BaseCell {
         return label
     }()
     
+//    override var isSelected: Bool {
+//        didSet {
+//            checkMark.isHidden = !isSelected
+//            imageView.alpha = isSelected ? 0.5 : 1
+//        }
+//    }
+    
     override func setupLayout() {
         addSubview(imageView)
         addSubview(label)
+        addSubview(favoriteView)
+        addSubview(checkMark)
         
         imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
@@ -78,7 +107,22 @@ class PlaceCell: BaseCell {
         label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         label.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-        //        label.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        label.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        
+        favoriteView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        favoriteView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        favoriteView.widthAnchor.constraint(equalToConstant: frame.size.width / 6).isActive = true
+        favoriteView.heightAnchor.constraint(equalToConstant: frame.size.height / 6).isActive = true
+        
+        checkMark.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        checkMark.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        checkMark.widthAnchor.constraint(equalToConstant: frame.size.width / 6).isActive = true
+        checkMark.heightAnchor.constraint(equalToConstant: frame.size.height / 6).isActive = true
+    }
+    
+    func selected(_ bool: Bool) {
+        checkMark.isHidden = !bool
+        imageView.alpha = bool ? 0.5 : 1
     }
     
 }

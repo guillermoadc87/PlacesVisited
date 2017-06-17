@@ -27,8 +27,7 @@ class PlacesViewController: UITableViewController, NSFetchedResultsControllerDel
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handlePresentAddPhotoVC))
-        navigationController?.title = "Places"
+        navigationItem.title = "Places"
         
     }
     
@@ -111,11 +110,6 @@ class PlacesViewController: UITableViewController, NSFetchedResultsControllerDel
         let photoVC = PhotoCollectionViewController(collectionViewLayout: layout)
         photoVC.cityName = cell?.textLabel?.text
         navigationController?.pushViewController(photoVC, animated: true)
-    }
-    
-    func handlePresentAddPhotoVC() {
-        let nc = UINavigationController(rootViewController: AddPhotoController())
-        present(nc, animated: true)
     }
     
     func handleLogout() {

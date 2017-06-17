@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
     
     lazy var logoutButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = UIColor(red: 59/255, green: 131/255, blue: 247/255, alpha: 1)
         button.setTitle("Logout", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.layer.borderWidth = 1
@@ -87,8 +88,6 @@ class ProfileViewController: UIViewController {
         view.addSubview(logoutButton)
         view.addSubview(activityIndicator)
         
-        
-        
         profileImageView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 50).isActive = true
         profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
@@ -96,8 +95,8 @@ class ProfileViewController: UIViewController {
         
         logoutButton.bottomAnchor.constraint(equalTo: profileImageView.topAnchor).isActive = true
         logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        logoutButton.widthAnchor.constraint(equalToConstant: 100)
-        logoutButton.heightAnchor.constraint(equalToConstant: 10)
+        logoutButton.widthAnchor.constraint(equalTo: profileImageView.widthAnchor).isActive = true
+        logoutButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         usernameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 5).isActive = true
         usernameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -108,7 +107,7 @@ class ProfileViewController: UIViewController {
     }
     
     func fetchProfilePicture(_ user: User) {
-        showActivityIndicator()
+//        showActivityIndicator()
         database.child("profile_picture/\(user.uid)/profilePictureURL").observe(.value, with: { snapshot in
             let profilePictureURL = snapshot.value as! String
             self.profileImageView.downloadImageWithURL(urlString: profilePictureURL, completionHandler: { profilePictureData, error in
@@ -118,7 +117,7 @@ class ProfileViewController: UIViewController {
                 }
                 performUIUpdatesOnMain {
                     self.profileImageView.image = UIImage(data: profilePictureData!)
-                    self.hideActivityIndicator()
+//                    self.hideActivityIndicator()
                 }
                 
             })

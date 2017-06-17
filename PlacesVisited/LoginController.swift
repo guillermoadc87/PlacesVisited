@@ -14,6 +14,7 @@ class LoginController: UIViewController {
     
     lazy var loginRegisterSegmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Login", "Register"])
+//        sc.backgroundColor = UIColor(red: 59, green: 131/255, blue: 247/255, alpha: 1)
         sc.translatesAutoresizingMaskIntoConstraints = false
         sc.selectedSegmentIndex = 0
         sc.addTarget(self, action: #selector(self.handleLoginRegisterChange), for: .valueChanged)
@@ -45,7 +46,7 @@ class LoginController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button.backgroundColor = .red
+        button.backgroundColor = UIColor(red: 59/255, green: 131/255, blue: 247/255, alpha: 1)
         button.addTarget(self, action: #selector(self.handleLoginRegister), for: .touchUpInside)
         return button
     }()

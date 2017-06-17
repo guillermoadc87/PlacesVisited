@@ -15,12 +15,19 @@ class SharesViewController: UICollectionViewController, UICollectionViewDelegate
     
     let database = Database.database().reference()
     var postArray:[Post]? = []
+    var loggedUser: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if let user = Auth.auth().currentUser {
+            if user != loggedUser {
+                loggedUser = user
+            }
+        }
+        
         self.collectionView!.register(PostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView?.backgroundColor = .white
+        collectionView?.backgroundColor = UIColor(white: 0.8, alpha: 1)
         
         navigationItem.title = "Shares"
         
@@ -52,6 +59,8 @@ class SharesViewController: UICollectionViewController, UICollectionViewDelegate
         })
     }
     
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let numberOfItems = postArray?.count else { return 0 }
         print("numberOfItemsInSection: ", numberOfItems)
@@ -66,7 +75,8 @@ class SharesViewController: UICollectionViewController, UICollectionViewDelegate
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PostCell
         
         let post = postArray?[indexPath.item]
-        cell.backgroundColor = .blue
+//        cell.backgroundColor = .blue
+        cell.user = loggedUser
         cell.post = post
         
         return cell
@@ -76,36 +86,39 @@ class SharesViewController: UICollectionViewController, UICollectionViewDelegate
 
 class PostCell: BaseCell {
     
+    let database = Database.database().reference()
+    var user: User?
+    
     var post: Post? {
         didSet {
             userEmail.text = post?.email
             postText.text = post?.text
-            profileImageView.image = UIImage(named: "default_profile_picture")
+            
+            if let user = self.user {
+                fetchProfilePicture(user)
+            }
             
             if let photoURLString = post?.photoURL {
-                showActivityIndicator()
-                DispatchQueue.global(qos: .background).async {
-                    self.placeImageView.downloadImageWithURL(urlString: photoURLString, completionHandler: { photoData, error in
-                        if error != nil {
-                            print(error)
+//                showActivityIndicator()
+                print("staring download")
+                self.placeImageView.downloadImageWithURL(urlString: photoURLString, completionHandler: { photoData, error in
+                    if error != nil {
+                        print(error)
+                    }
+                    if let data = photoData {
+                        performUIUpdatesOnMain {
+                            self.placeImageView.image = UIImage(data: data)
+//                            self.hideActivityIndicator()
                         }
-                        if let data = photoData {
-                            performUIUpdatesOnMain {
-                                self.placeImageView.image = UIImage(data: data)
-                                self.hideActivityIndicator()
-                            }
-                        }
-                    })
-
-                }
-                
+                    }
+                })
             }
         }
     }
     
     let profileImageView: UIImageView = {
         let iv = UIImageView()
-        iv.backgroundColor = .green
+        iv.image = UIImage(named: "default_profile_picture")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -114,7 +127,7 @@ class PostCell: BaseCell {
     
     let userEmail: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .red
+//        label.backgroundColor = .red
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -122,7 +135,7 @@ class PostCell: BaseCell {
     
     let postText: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .purple
+//        label.backgroundColor = .purple
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -130,7 +143,7 @@ class PostCell: BaseCell {
     
     let placeImageView: UIImageView = {
         let iv = UIImageView()
-        iv.backgroundColor = .black
+        iv.backgroundColor = UIColor(white: 0.95, alpha: 1)
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -196,6 +209,25 @@ class PostCell: BaseCell {
         let height = placeImageView.frame.size.width * 9 / 16
         placeImageView.frame.size.height = height
 //        placeImageView.heightAnchor.constraint(equalToConstant: height)
+    }
+    
+    func fetchProfilePicture(_ user: User) {
+        //        showActivityIndicator()
+        database.child("profile_picture/\(user.uid)/profilePictureURL").observe(.value, with: { snapshot in
+            let profilePictureURL = snapshot.value as! String
+            self.profileImageView.downloadImageWithURL(urlString: profilePictureURL, completionHandler: { profilePictureData, error in
+                if error != nil {
+                    print(error ?? "")
+                    return
+                }
+                performUIUpdatesOnMain {
+                    self.profileImageView.image = UIImage(data: profilePictureData!)
+                    //                    self.hideActivityIndicator()
+                }
+                
+            })
+        })
+        
     }
     
 }
