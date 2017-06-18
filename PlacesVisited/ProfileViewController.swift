@@ -102,23 +102,30 @@ class ProfileViewController: UIViewController {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.activitiIndicatorView.startAnimating()
         database.child("profile_picture/\(user.uid)/profilePictureURL").observe(.value, with: { snapshot in
-            let profilePictureURL = snapshot.value as! String
-            self.profileImageView.downloadImageWithURL(urlString: profilePictureURL, completionHandler: { profilePictureData, error in
-                if error != nil {
-                    print(error ?? "")
-                    return
-                }
-                if let photo = UIImage(data: profilePictureData!) {
-                    performUIUpdatesOnMain {
+            
+            if let profilePictureURL = snapshot.value as? String {
+                self.profileImageView.downloadImageWithURL(urlString: profilePictureURL, completionHandler: { profilePictureData, error in
+                    if error != nil {
+                        print(error ?? "")
+                        return
+                    }
+                    if let photo = UIImage(data: profilePictureData!) {
+                        performUIUpdatesOnMain {
+                            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                            self.activitiIndicatorView.stopAnimating()
+                            self.profileImageView.image = photo
+                        }
+                    } else {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         self.activitiIndicatorView.stopAnimating()
-                        self.profileImageView.image = photo
                     }
-                } else {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    self.activitiIndicatorView.stopAnimating()
-                }
-            })
+                })
+
+            }else {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                self.activitiIndicatorView.stopAnimating()
+            }
+            
         })
         
     }
