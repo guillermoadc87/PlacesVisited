@@ -281,17 +281,23 @@ extension CustomTabBarController: GMSPlacePickerViewControllerDelegate {
                 placeVisited?.longitude = place.coordinate.longitude
                 placeVisited?.city = city
                 placeVisited?.photoData = UIImagePNGRepresentation(pickedImage!) as NSData?
+                
+                do {
+                    try context.save()
+                } catch {
+                    print("There was a problem while saving to the database")
+                }
+                
+                print(placeVisited)
+                viewController.dismiss(animated: true, completion: nil)
+                vc1.performFetchFor(vc1.fetchedResultsController)
+                vc1.tableView.reloadData()
+                
+            } else {
+                viewController.dismiss(animated: true, completion: nil)
+                self.displayAlert(title: "You've being there", message: "This place is in your collection")
             }
             
-            do {
-                try context.save()
-            } catch {
-                print("There was a problem while saving to the database")
-            }
-            print(placeVisited)
-            viewController.dismiss(animated: true, completion: nil)
-            vc1.performFetchFor(vc1.fetchedResultsController)
-            vc1.tableView.reloadData()
         } else {
             self.displayAlert(title: "Network Error", message: "There was an error, please try again")
         }
