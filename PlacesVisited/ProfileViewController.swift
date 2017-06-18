@@ -101,6 +101,7 @@ class ProfileViewController: UIViewController {
     func fetchProfilePicture(_ user: User) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.activitiIndicatorView.startAnimating()
+        print("start downloading from: ", "profile_picture/\(user.uid)/profilePictureURL")
         database.child("profile_picture/\(user.uid)/profilePictureURL").observe(.value, with: { snapshot in
             
             if let profilePictureURL = snapshot.value as? String {
@@ -109,13 +110,16 @@ class ProfileViewController: UIViewController {
                         print(error ?? "")
                         return
                     }
+                    print("photo downloaded")
                     if let photo = UIImage(data: profilePictureData!) {
                         performUIUpdatesOnMain {
+                            print("asigning photo")
                             UIApplication.shared.isNetworkActivityIndicatorVisible = false
                             self.activitiIndicatorView.stopAnimating()
                             self.profileImageView.image = photo
                         }
                     } else {
+                        print("no photo on firebase")
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         self.activitiIndicatorView.stopAnimating()
                     }
