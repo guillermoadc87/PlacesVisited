@@ -51,13 +51,13 @@ class LoginController: UIViewController {
         return button
     }()
     
-    lazy var fbLogin: FBSDKLoginButton = {
-        let fbl = FBSDKLoginButton()
-        fbl.translatesAutoresizingMaskIntoConstraints = false
-        fbl.delegate = self
-        fbl.readPermissions = ["public_profile", "email", "user_friends"]
-        return fbl
-    }()
+//    lazy var fbLogin: FBSDKLoginButton = {
+//        let fbl = FBSDKLoginButton()
+//        fbl.translatesAutoresizingMaskIntoConstraints = false
+//        fbl.delegate = self
+//        fbl.readPermissions = ["public_profile", "email", "user_friends"]
+//        return fbl
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +72,7 @@ class LoginController: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(loginRegisterButton)
-        view.addSubview(fbLogin)
+//        view.addSubview(fbLogin)
         
         loginRegisterSegmentedControl.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -10).isActive = true
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[v0]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": loginRegisterSegmentedControl]))
@@ -91,11 +91,11 @@ class LoginController: UIViewController {
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[v0]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": loginRegisterButton]))
         loginRegisterButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        fbLogin.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        //        fbLogin.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 20).isActive = true
-        fbLogin.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-        fbLogin.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20).isActive = true
-        //        fbLogin.heightAnchor.constraint(equalToConstant: 70).isActive = true
+//        fbLogin.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        //        fbLogin.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 20).isActive = true
+//        fbLogin.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+//        fbLogin.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20).isActive = true
+//        //        fbLogin.heightAnchor.constraint(equalToConstant: 70).isActive = true
     }
     
     

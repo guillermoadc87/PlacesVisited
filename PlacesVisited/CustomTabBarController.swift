@@ -242,55 +242,61 @@ extension CustomTabBarController: GMSPlacePickerViewControllerDelegate {
         var city: City?
         var placeVisited: Place?
         
-        for component in place.addressComponents! {
-            if component.type == "country" {
-                let request: NSFetchRequest = Country.fetchRequest()
-                country = verifyDuplicityForRequest(request as! NSFetchRequest<NSFetchRequestResult>, withParameter: component.name) as? Country
-                print(country)
-                if country == nil {
-                    print(component.name)
-                    country = Country(context: context)
-                    country?.name = component.name
+        if let components = place.addressComponents {
+            for component in components {
+                if component.type == "country" {
+                    let request: NSFetchRequest = Country.fetchRequest()
+                    country = verifyDuplicityForRequest(request as! NSFetchRequest<NSFetchRequestResult>, withParameter: component.name) as? Country
+                    print(country)
+                    if country == nil {
+                        print(component.name)
+                        country = Country(context: context)
+                        country?.name = component.name
+                    }
+                } else if component.type == "locality" {
+                    let request: NSFetchRequest = City.fetchRequest()
+                    city = verifyDuplicityForRequest(request as! NSFetchRequest<NSFetchRequestResult>, withParameter: component.name) as? City
+                    print(city)
+                    if city == nil {
+                        print(component.name)
+                        city = City(context: context)
+                        city?.name = component.name
+                    }
                 }
-            } else if component.type == "locality" {
-                let request: NSFetchRequest = City.fetchRequest()
-                city = verifyDuplicityForRequest(request as! NSFetchRequest<NSFetchRequestResult>, withParameter: component.name) as? City
-                print(city)
-                if city == nil {
-                    print(component.name)
-                    city = City(context: context)
-                    city?.name = component.name
-                }
+                
+            }
+            if let cityCountry = city?.country {
+                print(cityCountry)
+            } else {
+                city?.country = country
+            }
+            let request: NSFetchRequest = Place.fetchRequest()
+            placeVisited = verifyDuplicityForRequest(request as! NSFetchRequest<NSFetchRequestResult>, withParameter: place.name) as? Place
+            print(placeVisited)
+            if placeVisited == nil {
+                print(place.name)
+                placeVisited = Place(context: context)
+                placeVisited?.name = place.name
+                placeVisited?.latitude = place.coordinate.latitude
+                placeVisited?.longitude = place.coordinate.longitude
+                placeVisited?.city = city
+                placeVisited?.photoData = UIImagePNGRepresentation(pickedImage!) as NSData?
             }
             
-        }
-        if let cityCountry = city?.country {
-           print(cityCountry)
+            do {
+                try context.save()
+            } catch {
+                print("There was a problem while saving to the database")
+            }
+            print(placeVisited)
+            viewController.dismiss(animated: true, completion: nil)
+            vc1.performFetchFor(vc1.fetchedResultsController)
+            vc1.tableView.reloadData()
         } else {
-            city?.country = country
-        }
-        let request: NSFetchRequest = Place.fetchRequest()
-        placeVisited = verifyDuplicityForRequest(request as! NSFetchRequest<NSFetchRequestResult>, withParameter: place.name) as? Place
-        print(placeVisited)
-        if placeVisited == nil {
-            print(place.name)
-            placeVisited = Place(context: context)
-            placeVisited?.name = place.name
-            placeVisited?.latitude = place.coordinate.latitude
-            placeVisited?.longitude = place.coordinate.longitude
-            placeVisited?.city = city
-            placeVisited?.photoData = UIImagePNGRepresentation(pickedImage!) as NSData?
+            self.displayAlert(title: "Network Error", message: "There was an error, please try again")
         }
         
-        do {
-            try context.save()
-        } catch {
-            print("There was a problem while saving to the database")
-        }
-        print(placeVisited)
-        viewController.dismiss(animated: true, completion: nil)
-        vc1.performFetchFor(vc1.fetchedResultsController)
-        vc1.tableView.reloadData()
+        
     }
     
     func verifyDuplicityForRequest(_ request: NSFetchRequest<NSFetchRequestResult>, withParameter parameter: String) -> NSManagedObject? {

@@ -50,7 +50,7 @@ class FavoritePhotoController: UICollectionViewController, NSFetchedResultsContr
         
         // Configure Fetch Request
         fetchRequest.sortDescriptors = []
-        fetchRequest.predicate = NSPredicate(format: "isFavorite == false")
+        fetchRequest.predicate = NSPredicate(format: "isFavorite == true")
         
         return fetchRequest
     }

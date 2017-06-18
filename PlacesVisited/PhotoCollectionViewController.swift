@@ -193,7 +193,7 @@ class PhotoCollectionViewController: UICollectionViewController, UICollectionVie
                 let cell = self.collectionView?.cellForItem(at: index) as! PlaceCell
                 // do stuff with your cell, for example print the indexPath
                 cell.favoriteView.isHidden = !cell.favoriteView.isHidden
-                cell.place?.isFavorite = cell.favoriteView.isHidden
+                cell.place?.isFavorite = !cell.favoriteView.isHidden
                 
                 do {
                     try context.save()

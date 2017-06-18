@@ -31,7 +31,7 @@ class PlaceCell: BaseCell {
             label.text = place?.name
             let image = UIImage(data: place?.photoData as! Data)
             imageView.image = image
-            favoriteView.isHidden = (place?.isFavorite)!
+            favoriteView.isHidden = !(place?.isFavorite)!
             
             if let title = label.text {
                 let size = CGSize(width: frame.width, height: frame.height)
@@ -39,13 +39,10 @@ class PlaceCell: BaseCell {
                 let estimatedRect = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12)], context: nil)
                 
                 if estimatedRect.size.width > frame.size.width {
-                    print(frame.size.width)
                     label.frame.size.width = frame.size.width
                 } else {
                     label.frame.size.width = estimatedRect.size.width
                 }
-                print(estimatedRect.size.width, frame.size.width, label.frame.size.width)
-                
             }
         }
     }
@@ -85,13 +82,6 @@ class PlaceCell: BaseCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-//    override var isSelected: Bool {
-//        didSet {
-//            checkMark.isHidden = !isSelected
-//            imageView.alpha = isSelected ? 0.5 : 1
-//        }
-//    }
     
     override func setupLayout() {
         addSubview(imageView)
