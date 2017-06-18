@@ -121,6 +121,7 @@ class LoginController: UIViewController {
             Auth.auth().signIn(withEmail: email, password: password, completion: { user, error in
                 if error != nil {
                     print(error ?? "")
+                    self.displayAlert(title: "Incorrect credencials", message: "Email/Password are not correct")
                     return
                 }
                 self.dismiss(animated: true, completion: nil)
@@ -129,6 +130,7 @@ class LoginController: UIViewController {
             Auth.auth().createUser(withEmail: email, password: password, completion: { user, error in
                 if error != nil {
                     print(error ?? "")
+                    self.displayAlert(title: "Network Error", message: "There was an error, please try again")
                     return
                 }
                 self.dismiss(animated: true, completion: nil)
@@ -151,6 +153,7 @@ extension LoginController: FBSDKLoginButtonDelegate {
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
             print(error)
+            self.displayAlert(title: "Network Error", message: "There was an error, please try again")
             return
         }
         
@@ -159,6 +162,7 @@ extension LoginController: FBSDKLoginButtonDelegate {
         Auth.auth().signIn(with: credential, completion: { user, error in
             if error != nil {
                 print(error ?? "")
+                self.displayAlert(title: "Network Error", message: "There was an error, please try again")
                 return
             }
             self.dismiss(animated: true, completion: nil)
@@ -167,6 +171,7 @@ extension LoginController: FBSDKLoginButtonDelegate {
         FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name"]).start { (connection, result, error) in
             if error != nil {
                 print(error ?? "")
+                self.displayAlert(title: "Network Error", message: "There was an error, please try again")
                 return
             }
             print("Succesfully logged in with FB")

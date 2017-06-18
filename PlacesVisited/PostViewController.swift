@@ -53,7 +53,7 @@ class PostViewController: UIViewController {
         storage.child(imagePath).putData(place?.photoData as! Data, metadata: metadata, completion: { metadata, error in
             if error != nil {
                 print(error ?? "")
-                self.displayAlert(title: "Connection Problem", message: "Please look for the nearest WIFI")
+                self.displayAlert(title: "Network Error", message: "There was an error, please try again")
                 self.disableInterection(false)
                 return
             }
@@ -63,7 +63,7 @@ class PostViewController: UIViewController {
                 self.database.child("posts").child((self.user?.uid)!).child((self.place?.name)!).updateChildValues(values, withCompletionBlock: { error, database in
                     if error != nil {
                         print(error ?? "")
-                        self.displayAlert(title: "There was an Error", message: error?.localizedDescription)
+                        self.displayAlert(title: "Network Error", message: "There was an error, please try again")
                         self.disableInterection(false)
                         return
                     }

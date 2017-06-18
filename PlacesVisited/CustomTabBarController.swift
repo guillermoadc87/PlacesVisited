@@ -121,8 +121,6 @@ class CustomTabBarController: UITabBarController {
         view.insertSubview(libraryButton, belowSubview: tabBar)
         view.addSubview(middleButton)
         
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
-        
         middleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         middleButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -2).isActive = true
         middleButton.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
@@ -200,7 +198,14 @@ class CustomTabBarController: UITabBarController {
         imagePicker.delegate = self
         
         if sender.tag == 0 {
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            let cameraAvailable = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
+            if cameraAvailable {
+                imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            } else {
+                self.displayAlert(title: "No Camera", message: "This device does not have a camera")
+                return
+            }
+            
         }
         
         present(imagePicker, animated: true, completion: nil)

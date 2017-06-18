@@ -108,6 +108,7 @@ class ProfileViewController: UIViewController {
                 self.profileImageView.downloadImageWithURL(urlString: profilePictureURL, completionHandler: { profilePictureData, error in
                     if error != nil {
                         print(error ?? "")
+                        self.displayAlert(title: "Network Error", message: "There was an error, please try again")
                         return
                     }
                     print("photo downloaded")
@@ -162,7 +163,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             if error != nil {
                 print(error ?? "")
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
-//                self.hideActivityIndicator()
+                self.activitiIndicatorView.stopAnimating()
+                self.displayAlert(title: "Network Error", message: "There was an error, please try again")
                 return
             }
                 
@@ -173,6 +175,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
                         print(error ?? "")
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         self.activitiIndicatorView.stopAnimating()
+                        self.displayAlert(title: "Network Error", message: "There was an error, please try again")
                         return
                     }
                     self.profileImageView.image = photo
