@@ -124,26 +124,31 @@ class PostCell: BaseCell {
 //        self.activitiIndicatorView.startAnimating()
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         database.child("profile_picture/\(user.uid)/profilePictureURL").observe(.value, with: { snapshot in
-            let profilePictureURL = snapshot.value as! String
-            self.profileImageView.downloadImageWithURL(urlString: profilePictureURL, completionHandler: { profilePictureData, error in
-                if error != nil {
-                    print(error ?? "")
-                    return
-                }
-                
-                if let photo = UIImage(data: profilePictureData!) {
-                    performUIUpdatesOnMain {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                        self.profileImageView.image = photo
-//                        self.activitiIndicatorView.stopAnimating()
+            if let profilePictureURL = snapshot.value as? String {
+                self.profileImageView.downloadImageWithURL(urlString: profilePictureURL, completionHandler: { profilePictureData, error in
+                    if error != nil {
+                        print(error ?? "")
+                        return
                     }
-                } else {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    self.activitiIndicatorView.stopAnimating()
-                }
-                
-                
-            })
+                    
+                    if let photo = UIImage(data: profilePictureData!) {
+                        performUIUpdatesOnMain {
+                            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                            self.profileImageView.image = photo
+                            //                        self.activitiIndicatorView.stopAnimating()
+                        }
+                    } else {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        self.activitiIndicatorView.stopAnimating()
+                    }
+                    
+                    
+                })
+            } else {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                self.activitiIndicatorView.stopAnimating()
+            }
+            
         })
         
     }
