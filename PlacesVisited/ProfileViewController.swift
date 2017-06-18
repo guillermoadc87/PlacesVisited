@@ -108,7 +108,9 @@ class ProfileViewController: UIViewController {
                 self.profileImageView.downloadImageWithURL(urlString: profilePictureURL, completionHandler: { profilePictureData, error in
                     if error != nil {
                         print(error ?? "")
-                        self.displayAlert(title: "Network Error", message: "There was an error, please try again")
+                        performUIUpdatesOnMain {
+                            self.displayAlert(title: "Network Error", message: "There was an error, please try again")
+                        }
                         return
                     }
                     print("photo downloaded")
@@ -121,14 +123,18 @@ class ProfileViewController: UIViewController {
                         }
                     } else {
                         print("no photo on firebase")
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                        self.activitiIndicatorView.stopAnimating()
+                        performUIUpdatesOnMain {
+                            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                            self.activitiIndicatorView.stopAnimating()
+                        }
                     }
                 })
 
-            }else {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                self.activitiIndicatorView.stopAnimating()
+            } else {
+                performUIUpdatesOnMain {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    self.activitiIndicatorView.stopAnimating()
+                }
             }
             
         })
