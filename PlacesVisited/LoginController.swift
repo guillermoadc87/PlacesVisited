@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+import NVActivityIndicatorView
 
 class LoginController: UIViewController {
     
@@ -51,6 +52,12 @@ class LoginController: UIViewController {
         return button
     }()
     
+    let activitiIndicatorView: NVActivityIndicatorView =  {
+        let aiv = NVActivityIndicatorView(frame: CGRect(x: 50, y: 50, width: 30, height: 30), type: NVActivityIndicatorType.ballPulse, color: UIColor(red: 59/255, green: 131/255, blue: 247/255, alpha: 1))
+        aiv.translatesAutoresizingMaskIntoConstraints = false
+        return aiv
+    }()
+    
 //    lazy var fbLogin: FBSDKLoginButton = {
 //        let fbl = FBSDKLoginButton()
 //        fbl.translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +79,7 @@ class LoginController: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(loginRegisterButton)
+        view.addSubview(activitiIndicatorView)
 //        view.addSubview(fbLogin)
         
         loginRegisterSegmentedControl.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -10).isActive = true
@@ -90,6 +98,11 @@ class LoginController: UIViewController {
         loginRegisterButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10).isActive = true
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[v0]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": loginRegisterButton]))
         loginRegisterButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        activitiIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activitiIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activitiIndicatorView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        activitiIndicatorView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
 //        fbLogin.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 //        //        fbLogin.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 20).isActive = true
@@ -116,23 +129,27 @@ class LoginController: UIViewController {
             self.displayAlert(title: "", message: "A Password most be specify")
             return
         }
-        
+        activitiIndicatorView.startAnimating()
         if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
             Auth.auth().signIn(withEmail: email, password: password, completion: { user, error in
                 if error != nil {
                     print(error ?? "")
-                    self.displayAlert(title: "Incorrect credencials", message: "Email/Password are not correct")
+                    self.activitiIndicatorView.stopAnimating()
+                    self.displayAlert(title: "Almost There!", message: error?.localizedDescription)
                     return
                 }
+                self.activitiIndicatorView.stopAnimating()
                 self.dismiss(animated: true, completion: nil)
             })
         } else {
             Auth.auth().createUser(withEmail: email, password: password, completion: { user, error in
                 if error != nil {
                     print(error ?? "")
-                    self.displayAlert(title: "Network Error", message: "There was an error, please try again")
+                    self.activitiIndicatorView.stopAnimating()
+                    self.displayAlert(title: "Almost There!", message: error?.localizedDescription)
                     return
                 }
+                self.activitiIndicatorView.stopAnimating()
                 self.dismiss(animated: true, completion: nil)
             })
         }
