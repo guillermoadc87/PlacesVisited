@@ -8,7 +8,7 @@ In order for the project run in Xcode, you need to install the pods included in 
 
 ```$ sudo gem install cocoapods```
 
-With CocoPods installed, you can proceed to installing the pods that the project needs like this:
+With CocoPods installed, you can proceed to installing the pods like this:
 
 ```$ pod install```
 
