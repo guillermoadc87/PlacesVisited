@@ -19,9 +19,9 @@ Usage
 
 ### Places Tab
 
-Here you have a list of all the cities you have being seperated by country. By touching the city you go to the detail page where you see the photos of all the different places in the city.
+Here you have a list of all the cities you have being seperated by country. By touching the city you go to the detail page where you see the all the photos you took of the diffenrent pf places from that city.
 
-In the detail page you can select favorites photos (by touching and holding), you can delete bad photos (by preseing the Select buttton) and share with other users (by tapping in the photo).
+In the detail page you can select favorite photos (by touching and holding), you can delete bad photos (by preseing the Select buttton) and share with other users (by tapping in the photo).
 
 ### Shares Tab
 
@@ -37,4 +37,4 @@ Here you can see all the photos you have marked as favorite in the Places Tab.
 
 ### Profile Tab
 
-Here is were all the user information is located. You can logout of the app in the Tab.
+Here is were all the user information is located. You can logout of the app in this Tab.
